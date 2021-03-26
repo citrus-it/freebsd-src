@@ -1,0 +1,30 @@
+#!/bin/ksh
+
+last=`cat last`
+
+rm -rf patches data
+mkdir patches data
+
+git -C .. log --reverse --pretty=short $last.. \
+    `awk '{print $1}' < bhyve.dirs` > data/bhyve.log
+git -C .. log --reverse --pretty=oneline $last.. \
+    `awk '{print $1}' < bhyve.dirs` | nl > data/bhyve.slog
+git -C .. diff $last.. `awk '{print $1}' < bhyve.dirs` > data/bhyve.diff
+
+(
+	cd patches
+	git -C ../.. format-patch -o `pwd` $last.. \
+	    `awk '{print $1}' < ../bhyve.dirs`
+)
+
+while read old new; do
+	sed -i "s^$old^$new^g" data/bhyve.diff patches/*.patch
+done < bhyve.dirs
+
+sed -i "
+	s^usr/src/cmd/bhyve/bhyve.8^usr/src/man/man8/bhyve.8^
+	s^usr/src/cmd/bhyve/bhyve_config.5^usr/src/man/man5/bhyve_config.5^
+	s^usr/src/cmd/bhyvectl/bhyvectl.8^usr/src/man/man8/bhyvectl.8^
+	s^uts/i86pc/io/vmm/vmm_dev.c^uts/i86pc/io/vmm/vmm_sol_dev.c^
+" patches/*.patch
+

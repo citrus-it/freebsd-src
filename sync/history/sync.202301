@@ -1,0 +1,175 @@
+
+S - skipped
+U - updated to match upstream
+~ - partially taken
+* - merged
+ F - only freebsd-specific code changed
+ A - already had
+
+S    1	bhyve: Support other schemes for naming pass-through devices.
+~    2	bhyve: Validate host PAs used to map passthrough BARs.
+*    3	bhyve e1000: Sanitize transmit ring indices.
+*    4	bhyve virtio-scsi: Tidy warning and debug prints.
+*    5	bhyve virtio-scsi: Avoid out of bounds accesses to guest requests.
+*    6	bhyve(4): Remove a double word in a source code comment
+~    7	bhyve: create all vcpus on startup
+S    8	vmm: permit some IPIs to be handled by userspace
+S    9	vmm: Remove unneeded variable maxcpus
+S   10	Revert "vmm: Remove unneeded variable maxcpus"
+S   11	Revert "vmm: permit some IPIs to be handled by userspace"
+S   12	bhyve: Fix build when BHYVE_SNAPSHOT is set
+*   13	bhyve: Make smbios tables local to smbiostbl.c
+*   14	bhyve: Address -Wno-unused warnings in atkbd.c
+*   15	bhyve: Address compiler warnings in audio.c
+*   16	bhyve: Use designated initializers for virtio_consts tables
+*   17	bhyve: Address some warnings in bhyverun.c
+*F  18	bhyve: Don't free an invalid pointer.
+*   19	bhyve: Annotate unused function parameters
+*   20	bhyve: Make pci_bars local to pci_emul.c
+*   21	bhyve: Make bc_magic unsigned
+*   22	bhyve: Initialize the return value in blockif_register_resize_callback()
+S   23	vmm: permit some IPIs to be handled by userspace
+*   24	vmm: increase vlapic version
+    Mac os panics on apic versions lower than 0x14.
+    See https://opensource.apple.com/source/xnu/xnu-7195.81.3/osfmk/i386/lapic_native.c.auto.html
+*   25	vmm: validate icr value
+S   26	bhyve: Address some warnings in bhyverun.c
+*   27	bhyve: Fix some warnings in the ps2 emulation code
+*   28	bhyve: Use the proper type for string literals
+*   29	bhyve: USB device model structures can be qualified with "static"
+*   30	bhyve: Avoid arithmetic on void pointers
+S   31	bhyve: Fix some warnings in the snapshot code
+*   32	bhyve: Put the prototype for vmexit_task_switch() in a header
+*   33	bhyve: Put the prototype for vga_render() in a header
+*   34 bhyve: Make hda_ops function tables const
+*   35	bhyve: Annotate an unused function as such
+S   36	bhyve: Handle snapshots of unconfigured virtio-net devices
+S   37	libvmmapi: Provide an interface for limiting rights on the device fd
+*F  38	bhyve: Use the new vm_limit_rights() interface
+*   39	bhyve: Drop a bogus const qualifier
+*   40	bhyve: Avoid shadowing global variables in bhyverun.c
+*   41	bhyve: Avoid arithmetic on void pointers
+*   42	bhyve: Fix a typo in a function name
+*   43	bhyve: Address warnings in blockif_proc()
+*   44	bhyve: Address signed/unsigned comparison warnings in the AHCI model
+*   45	bhyve: Address signed/unsigned comparison warnings in the e1000 model
+*   46	bhyve: Address some signed/unsigned comparison warnings
+S   47	vmm: Fix AP startup with old userspace binaries.
+S   48	bhyve: Make sure that the VNC version is initialized
+*   49	bhyve: Fix an apparent pointer arithmetic bug in the xhci emulation
+*   50	bhyve: Remove an unused parameter from pci_nvme_append_iov_req()
+*   51	bhyve: Implement MSR_MISC_FEATURES_ENABLES
+S   52	vmm: do not leak halted_cpus bit after suspension
+*   53	bhyve: initial PowerCycles value
+*   54	bhyve: Address warnings about potential unaligned accesses in fwctl.c
+*   55	bhyve: Define an accessor for net backend private data
+*   56	bhyve: Drop volatile qualifiers from xhci hw struct fields
+*   57	bhyve: Drop volatile qualifiers from virtio rings
+S   58	bhyve: Drop volatile qualifiers from snapshot code
+*   59	bhyve: Cast away const when fetching a config nvlist
+*   60	bhyve: Fix a typo in a comment
+*   61	bhyve: Simplify control flow in the xhci device model
+*   62	bhyve: abort and return FEATURE_NOT_SAVEABLE while set feature with a save flag for NVMe controller.
+*   63	bhyve: return FEATURE_NOT_CHANGEABLE for unimplemented feature of NVMe controller
+*   64	bhyve: nvme controller obey async event setting when reporting critical temperature
+*   65	bhyve/kdblayout: add some missing keys to german layout
+*   66	bhyve: add basic basl implementation
+*   67	bhyve: add table dump functions for basl
+*   68	bhyve: use basl to load ACPI tables
+*   69	bhyve: add basl support for int values
+*   70	bhyve: add basl support for generic addresses
+*   71	bhyve: add basl support for length fields
+*   72	bhyve: add basl support for checksums
+*   73	bhyve: add basl support for pointers
+*   74	bhyve: Use XHCI_PORTREG_PTR in one place that open-coded it.
+*   75	bhyve: add basl support for common table header
+*   76	bhyve: build DSDT table by basl
+S   77	vmm: Simplify saving of absolute TSC values in snapshots.
+
+S   78	vmm: Use vm_get_maxcpus() instead of VM_MAXCPU in various places.
+S   79	vmm svm: Refactor per-vCPU data.
+S   80	vmm vmx: Refactor per-vCPU data.
+S   81	vmm svm: Mark all VMCB state caches dirty on vCPU restore.
+S   82	vmm: Rework snapshotting of CPU-specific per-vCPU data.
+S   83	vmm vmx: Add a global bool to indicate if the host has the TSC_AUX MSR.
+S   84	vmm: Refactor storage of CPU-dependent per-vCPU data.
+S   85	vmm: Remove the per-vm cookie argument from vmmops taking a vcpu.
+S   86	vmm svm: Add SVM_CTR* wrapper macros.
+S   87	vmm vmx: Add VMX_CTR* wrapper macros.
+S   88	vmm: Use VLAPIC_CTR* in more places.
+S   89	vmm: Expose struct vcpu as an opaque type.
+S   90	vmm: Use struct vcpu with the vmm_stat API.
+S   91	bhyve: Remove unused vm and vcpu arguments from vm_copy routines.
+S   92	vmm: Add _KERNEL guards for io headers shared with userspace.
+S   93	vmm: Add vm_gpa_hold_global wrapper function.
+S   94	vmm: Use struct vcpu in the instruction emulation code.
+S   95	vmm: Pass vcpu instead of vm and vcpuid to APIs used from CPU backends.
+S   96	vmm: Remove vcpuid from I/O port handlers.
+S   97	vmm: Remove support for vm_rendezvous with a cpuid of -1.
+S   98	vmm: Use struct vcpu in the rendezvous code.
+S   99	vmm: Remove unused vcpuid argument from vioapic_process_eoi.
+S  100	vmm ppt: Remove unused vcpu arg from MSI setup handlers.
+S  101	vmm: Lookup vcpu pointers in vmmdev_ioctl.
+S  102	vmm vmx: Allocate vpids on demand as each vCPU is initialized.
+S  103	vmm stat: Add a special nelems constant for arrays sized by vCPU count.
+S  104	vmm: Destroy mutexes.
+S  105	vmm: Use an sx lock to protect the memory map.
+S  106	vmm devmem_mmap_single: Bump object reference under memsegs lock.
+S  107	vmm: Use a cpuset_t for vCPUs waiting for STARTUP IPIs.
+S  108	vmm: Allocate vCPUs on first use of a vCPU.
+S  109	vmm: Convert VM_MAXCPU into a loader tunable hw.vmm.maxcpu.
+S  110	vmm: Trim some pointless #ifdef KTR.
+S  111	vmm: Restore the correct vm_inject_*() prototypes
+
+S  112	bhyve: Disable thread safety analysis
+*  113	bhyve: Address an unused parameter warning in the smbios code
+*  114	bhyve: Let BASL compile with raised warnings
+*  115	bhyve: Avoid using a packed struct for xhci port registers
+*  116	bhyve: Enable the default compiler warnings
+S  117	vmm: Fix non-INVARIANTS build
+S  118	vmm: Fix build w/o KDTRACE_HOOKS.
+S  119	vmm: remove unneccessary rendezvous assertion
+*  120	bhyve: build FACS table by basl
+*  121	bhyve: make basl_table_add_* functions public
+*  122	bhyve: add helper to append a basl table without a header
+*  123	bhyve: build MCFG table by basl
+*  124	bhyve: add helper to fill a ACPI_GENERIC_ADDRESS
+*  125	bhyve: build HPET table by basl
+*  126	bhyve: build MADT table by basl
+*  127	bhyve: build FADT table by basl
+*  128	bhyve: build XSDT table by basl
+*  129	bhyve: build RSDT table by basl
+*  130	bhyve: build RSDP table by basl
+*  131	bhyve: use dynamic ACPI table offsets
+S  132	vmm: don't lock a mtx in the icr_low write handler
+*  133	bhyve basl: Use GCC pragmas.
+*  134	bhyve: Fix sign compare warnings in the e1000 device model.
+*  135	bhyve: Don't leak uninitialized bits in NVMe completion statuses.
+*  136	bhyve: Clear lid to 0 for internal device errors for NVMe AENs.
+*  137	bhyve: Avoid unlikely truncation of the blockif ident strings.
+*  138	bhyve: Fix sign compare warnings in the NVMe device model.
+*  139	bhyve: Appease warning about a potentially unaligned pointer.
+*  140	bhyve: Avoid passing a possible garbage pointer to free().
+S  141	vmm: Remove stale comment for vm_rendezvous.
+*F 142	bhyve virtio-scsi: Fix residual reporting.
+*F 143	CTL: Increase maximum SCSI tag size from 32 to 64 bits.
+*F 144	CTL: Allow userland supply tags via ioctl frontend.
+*  145	bhyve: build SPCR ACPI table
+SA 146	vmm: VM_GET/SET_KERNEMU_DEV should run with the vCPU locked.
+S  147	vmm: Don't lock a vCPU for VM_PPTDEV_MSI[X].
+S  148	vmm: Avoid infinite loop in vcpu_lock_all error case.
+S  149	vmm: Free vCPUs when destroying them.
+*  150	bhyve: Remove unused argument from pci_nvme_handle_doorbell.
+*  151	bhyve: Pass a vCPU ID of 0 to vm_setup_pptdev_msi*.
+*  152	bhyve: Remove unused vcpu argument from PCI read/write methods.
+*  153	bhyve: Remove the unused vcpu argument from all of the I/O port handlers.
+S  154	vm: reduce lock contention when processing vm batchqueues
+~  155	nvme: Clear the notify flag if the consumer rejects the controller.
+*  156	bhyve: Remove handler for VM_EXITCODE_SPINUP_AP.
+*  157	bhyve: Remove unused return value from spinup_ap.
+*  158	bhyve: Simplify setting vCPU capabilities.
+*  159	bhyve: Remove some no-op code for setting RIP.
+*  160	bhyve: Allocate struct vm_exit on the stack in vm_loop.
+*F 161	bhyve: Don't access vcpumap[vcpu] directly in parse_cpuset().
+*F 162	bhyve: Tidy vCPU pthread startup.
+*F 163	bhyve: Simplify spinup_ap_realmode slightly.

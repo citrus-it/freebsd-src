@@ -1,0 +1,60 @@
+
+S - skipped
+U - updated to match upstream
+~ - partially taken
+* - merged
+ F - only freebsd-specific code changed
+ A - already had
+
+S    1	vmm: vlapic resume can eat 100% CPU by vlapic_callout_handler
+*    2	bhyve: add support for MTRR
+*    3	bhyve: add nvlist functions for setting unset nodes
+*    4	bhyve: get mediasize for character devices when resizing virtio-blk
+S    5	bhyve/snapshot: fix pthread_create() error check
+*    6	Append Keyboard Layout specified option for using VNC.
+*    7	bhyve: ahci: Fix regression with no ports
+*F   8	bhyve/block_if: allow DIOCGMEDIASIZE ioctl
+S    9	pkgbase: bhyve: Tag the kbdlayout file to be in the bhyve package
+*   10	bhyve nvme: Advertise v1.4 support
+*   11	bhyve nvme: Fix NVM Format completion status
+*   12	bhyve nvme: Fix Namespace Specific Set Features
+*   13	bhyve nvme: Implement Log Page Offset
+*   14	bhyve nvme: Add missing Admin opcodes
+*   15	bhyve nvme: Remove redundant AER Limit checks
+*   16	bhyve nvme: Fix Set Features
+*   17	bhyve nvme: Add Temperature Threshold support
+*   18	bhyve nvme: Update v1.4 Identify Controller data
+*   19	bhyve nvme: Add Select support to Get Features
+*   20	bhyve nvme: Fix LBA out-of-range calculation
+*   21	bhyve nvme: Fix reported VWC value
+*   22	bhyve nvme: Fix Set Features, AEN
+*   23	bhyve nvme: Fix Identify Namespace, NSID=ffffffff
+*   24	bhyve/virtio: use correct device id for virtio-scsi
+*   25	Extend the VMM stats interface to support a dynamic count of statistics.
+*   26	bhyve: Fix getaddrinfo() error handling
+S   27	bhyve/snapshot: switch to nvlist for snapshot requests
+S   28	bhyve/snapshot: use a string for cmd element in the nvlist
+*   29  nvme: Add OAES bit-field definitions
+*   30  nvme: fix spelling of Namespace
+*   31  bhyve nvme: Advertise Namespace changed AEN
+*   32  bhyve: plug memory leak in topology_parse()
+S   33	vmm: fix "set but not used" warnings
+S   34	vmm: fix "set but not used" warnings
+S   35	vmm: fix "set but not used" warnings
+*   36	bhyve: add varfile option to nvlist of lpc device
+*   37	bhyve: Allocate mmio_hint array based on number of guest CPUs.
+*   38	bhyve: Make the MADT dynamically sized.
+*   39	bhyve: Allocate dynamic arrays to hold per-VCPU state.
+*F  40	bhyve: Don't force an upper bound on vCPUs when parsing pinning.
+*   41	bhyve: Use vm_get_topology to query kernel's maximum vCPU count.
+*   42	bhyve: Remove VM_MAXCPU from the userspace API/ABI.
+*   43	bhyve: export funcs for read/write pci config
+*   44	bhyve: add ROM emulation
+SA  45	bhyve/usage: memory size is not in MB
+*   46	bhyve.8: Fix a typo
+U   47	bhyve: missing mutex initializations
+S   48	bhyvectl: drop vm_get_name()
+S   49	libvmm: constify vm_get_name()
+S   50	bhyve/snapshot: limit snapshot filename to NAME_MAX
+S   51	bhyve: sweep MAX_VMNAME
+

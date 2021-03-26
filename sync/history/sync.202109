@@ -1,0 +1,69 @@
+*    1 bhyve: Enable virtio-scsi legacy config parsing.
+*    2 bhyve: change vq_getchain to return iovecs in both directions
+*    3 AMD-vi: Fix mismatched NULL checking in amdiommu teardown path
+*    4 AMD-vi: Mixed format IVHD block should replace fixed format IVHD block
+A    5 Fix typo in xhci nvlist node name, and also increment device counter.
+A    6 bhyve: fix regression in legacy virtio-9p config parsing
+*    7 bhyve: add SMBIOS Baseboard Information
+*    8 bhyve: Move the gdb_active check to gdb_cpu_suspend().
+*    9 bhyve: implement rdmsr for MSR_IA32_FEATURE_CONTROL
+*   10 bhyve.8: Make synopsis more readable
+*   11 bhyve: Fix synopsis in the usage message
+*   12 bhyve: Improve the option description in the usage message
+*   13 bhyve.8: Sort the options in the OPTIONS section
+*   14 bhyve.8: Improve the description and synopsis of -l
+*   15 bhyve.8: Improve the description of the -m flag
+S   16 bhyve.8: Fix the synopsis of -p
+S   17 bhyve.8: Clean up description of -r		(snapshot)
+*   18 bhyve.8: Fix indention in the signals table
+*   19 bhyve.8: Clean-up synopsis of -s
+*   20 bhyve.8: Clean up the slot description of -s
+*   21 bhyve.8: Improve emulation description of the -s flag
+S   22 bhyve.8: Clean up network backends section
+*   23 bhyve.8: Clean up block storage device backends description
+S   24 bhyve.8: Clean up SCSI device backends section
+*   25 bhyve.8: Clean up 9P device backends section
+*   26 bhyve.8: Clean up TTY, boot ROM, and pass-through descriptions
+*   27 bhyve.8: Clean up virtio console device backends description
+*   28 bhyve.8: Improve framebuffer backends description
+*   29 bhyve.8: Improve documentation of NVME backend
+*   30 bhyve.8: Improve AHCI backends documentation
+S   31 bhyve: Document the format for HD audio backends
+*   32 bhyve.8: Fix mandoc -Tlint issues
+*   33 AMD-vi: Fortify IVHD device_identify process
+*   34 bhyve: Be explicit that setting config.dump will not start a VM.
+*   35 Append Keyboard Layout specified option for using VNC.
+*   36 bhyve: Gracefully handle virtio-scsi with no conf
+*   37 bhyve: Set SO_REUSEADDR on the gdb stub socket
+*   38 libvmm: explicitly save and restore errno in vm_open()
+S   39 bhyve/snapshot: provide a way to send other messages/data to bhyve
+S   40 bhyve/snapshot: split up mutex/cond initialization from socket creation
+*   41 vmm: Let guests enable SMEP/SMAP if the host supports it
+*   42 Add a virtio-input device emulation.		(but not wired up)
+*   43 bhyve: Register new kevents synchronously.
+*   44 bhyve: Add support for EVFILT_VNODE mevents.
+*   45 bhyve: Add support for handling disk resize events to block_if.
+*   46 bhyve: Split out a lower-level helper for VirtIO interrupts.
+*   47 bhyve vtblk: Inform guests of disk resize events.
+*   48 bhyve: enhance debug info for memory range clash
+*   49 bhyve: Fix cli regression with NVMe ram		(replaces 13860)
+*   50 vmm: Fix ivrs_drv device_printf usage
+*   51 bhyve: fix NVMe MDTS comment
+*   52 bhyve: Fix NVMe iovec construction for large IOs
+*   53 vmm: Fix AMD-vi using wrong rid range
+*   54 libvmmapi: Fix warnings and stop overridding WARNS
+*   55 bhyve: net_backends, automatically IFF_UP tap devices
+S   56 vmm: Bump vmname buffer in struct vm to VM_MAX_NAMELEN + 1
+*   57 bhyve: Use fspacectl(2) for BOP_DELETE on regular file images
+A   58 amd64: Fix output operand specs for the stmxcsr and vmread intrinsics
+*   59 vmm: Make iommu ops tables const
+*   60 vmm: Fix wrong assert in ivhd_dev_add_entry
+S   61 bhyve: Use pci(4) to access I/O port BARs
+S   62 vmm: Add credential to cdev object
+*   63 byhve: add option to specify IP address for gdb
+*   64 bhyve: change a default address from ANY to localhost
+*   65 bhyve: Fix vq_getchain() error handling bugs in various device models
+*   66 bhyve: Nuke double-semicolons
+S   67 Create sys/reg.h for the common code previously in machine/reg.h
+*   68 bhyve: Fix pci device node key in bhyve_config.5
+A   69 Remove an always-true check.
