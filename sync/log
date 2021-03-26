@@ -1,0 +1,12 @@
+#!/bin/ksh
+
+last=`cat last`
+
+if [ "$1" = -v ]; then
+	git -C .. log --reverse --pretty=oneline $last.. \
+	    `awk '{print $1}' < bhyve.dirs` | nl
+else
+	git -C .. log --reverse --pretty=oneline $last.. \
+	    `awk '{print $1}' < bhyve.dirs` | cut -d\  -f2- | nl
+fi
+

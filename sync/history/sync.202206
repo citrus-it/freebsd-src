@@ -1,0 +1,70 @@
+
+S - skipped
+U - updated to match upstream
+~ - partially taken
+* - merged
+ F - only freebsd-specific code changed
+ A - already had
+
+SA   1	bhyve: Do not remove guest physical addresses from IOMMU host domain
+UA   2	bhyve: avoid overflow of BAR index
+UA   3	bhyve: avoid uninitialized variable
+SF   4	bhyve: avoid an empty passthru config value
+UA   5	bhyve: validate e82545 checksum offset field
+SA   6	man pages: Fix typo
+S    7	vmm: Re-quiet set but unused warnings.
+*    8	vmm amdvi: Move ctrl under #ifdef AMDVI_DEBUG_CMD.
+S    9	Fix a typo in previous commit.
+*   10	nvme: new define for size of host memory buffer sizes
+S   11	bhyve: use linker set for ipc commands
+*   12	vmm: fix set but not used warning
+S   13	vmm: fix set but not used warnings
+S   14	vmm: fix set but not used warnings
+S   15	vmm: fix set but not used warning
+S   16	vmm: fix set but not used warning
+S   17	vmm: fix set but not used warning
+S   18	vmm_instruction_emul.c: fix bhyve build
+*   19	nvme: Define NVME_MPS_SHIFT
+*   20	nvme: Remove NVME_MAX_XFER_SIZE, replace inline calculation
+S   21	bhyve/snapshot: ..back to SOCK_STREAM
+*   22	bhyve: Fix virtio-console legacy configuration parsing
+S   23	amd64: Remove unused devclass arguments to DRIVER_MODULE.
+S   24	vmm: Destroy character devices synchronously.
+*   25	bhyve: use bhyve_config for SMBIOS strings
+*   26	vmm: add tunable to trap WBINVD
+S   27	vmm: move bumping VMEXIT_USERSPACE stat to the right place
+S   28	amd64: -m32 support for machine/vmparam.h
+*   29	bhyve: Report an error for invalid UUIDs.
+~   30	bhyve: Snapshot impovements for 'blockif' backend
+S   31	bhyve: Enable suspend/resume support for virtio-blk.
+SA  32	vmm: Cherry pick illumos commit '13361 bhyve should mask RDT cpuid info'
+*   33	bhyve virtio-net: Allow backend type to be explicitly specified.
+*F  34	libvmmapi: Add vm_close()
+S   35	bhyve: Document the "type" config variable for network device models.
+S   36	vmm: Fix snapshots for AMD CPUs
+*   37	libvmm: add __BEGIN_DECLS/__END_DECLS for linking with c++ binaries
+S   38  vm_object: Modify various drivers to allocate OBJT_SWAP objects
+*   39	vmm: emulate INVD by ignoring it
+*   40	bhyve: Initialize more registers in vcpu_reset()
+*   41	bhyve: fix spelling mistake in passthru emulation
+S   42	AST: rework
+*   43	nvme: Print CRD, M and DNR status bits on errors.
+SA  44	lib9p: Remove potential buffer overwrite in l9p_puqids()
+*   45	bhyve nvme: Fix out-of-bound IOV array access
+*   46	bhyve nvme: Check return value of mapped memory
+*   47	bhyve nvme: Fix Controller init error cases
+*   48	bhyve nvme: Fix uninitialized pointer
+*   49	bhyve: Address -Wunused* warnings in pci_nvme.c
+*   50	bhyve: Address uses of uninitialized variables in pci_nvme.c
+*   51	bhyve: Fix Number of Power States Supported value
+*   52	bhyve nvme: Fix Active Firmware Info
+*   53	bhyve nvme: Fix firmware read only initialization
+*   54	bhyve nvme: Fix reported SANICAP value
+*   55	bhyve nvme: Support minimal Controller list
+*   56	bhyve: Use "void" instead of empty parameter lists
+*   57	bhyve: Mark variables and functions as static where appropriate
+*   58	bhyve: Sprinkle const qualifiers where appropriate
+*   59	bhyve nvme: Switch to POSIX standard functions
+SF  60	bhyve: Style fix for read/write_config.
+*   61	bhyve xhci: Cache the value of MaxPStreams when initializing an endpoint.
+*   62	bhyve e1000: Skip packets with a small header.
