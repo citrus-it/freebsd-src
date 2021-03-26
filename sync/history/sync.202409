@@ -1,0 +1,198 @@
+
+S - skipped
+U - updated to match upstream
+~ - partially taken
+* - merged
+ F - only freebsd-specific code changed
+ A - already had
+
+S    1	bhyve: always generate ACPI tables
+*    2	bhyve: Improve pcifd function naming
+*    3	bhyve: Start moving machine-dependent code into subdirectories
+*    4	bhyve: Move some more amd64-specific drivers to their own subdir
+*    5	bhyve: Move more amd64-specific code under amd64/
+*    6	bhyve: Move kernemu to amd64/
+*    7	bhyve: Split vmexit handling into a separate file
+S    8	bhyve: Remove some unneeded includes from snapshot.c
+*    9	bhyve: Move MSR emulation into amd64/
+*   10	bhyve: Move the RTC driver to amd64/
+*   11	bhyve: Move power management code to amd64/
+S   12	bhyve: Move the gvt-d driver to amd64/
+*   13	bhyve: Move AP startup code to amd64/
+*   14	bhyve: Compile some device models only on amd64
+*   15	bhyve: Move legacy PCI interrupt handling under amd64/
+*   16	bhyve: Conditionally compile framebuffer-related code
+*   17	bhyve: Make most I/O port handling specific to amd64
+S   18	bhyve: Make gdb support optional
+*   19	bhyve: Move vcpu initialization into a MD source file
+*   20	bhyve: Move most early initialization into an MD routine
+*   21	bhyve: Build the HPET ACPI table on amd64 only
+*F  22	bhyve: Move the vm_inject_fault() implementation to vmexit.c
+SF  23	bhyve(8): Expand the -p option text with additional text and an example
+SA  24	bhyve(8): Fix style warnings emitted by mandoc, no content changes
+S   25	x86: Rename {stop,start}_emulating to fpu_{enable,disable}
+S   26	bhyve: Document the hw.vmm.maxcpu tunable and the current limit on vCPUs
+SA  27	bhyve nvme: Add NQN value
+*   28	bhyve: Some fwctl simplifications.
+*   29	bhyve ahci: Replace WPRINTF with EPRINTLN
+*   30	bhyve: Replace many fprintf(stderr, ...) calls with EPRINTLN
+SA  31	bhyve: fix buffer overflow in QemuFwCfg
+*F  32	bhyve: Use VMIO_SIOCSIFFLAGS instead of SIOCGIFFLAGS
+S   33	bhyve: Remove init_snapshot() and initialize static vars
+SF  34	vmx: Prefer consistent naming for loader tunables
+*F  35	bhyve: fix arguments to ioctl(VMIO_SIOCSIFFLAGS)
+*   36	bhyve: ps2 implement command 0xf6
+S   37	bhyve(8): fix manpage formatting
+*   38	bhyve: Fix the GDB_LOG build
+*   39	bhyve: increase fbuf display resolution limit
+*   40	bhyve: Split backends into separate files
+S   41	bhyve: Add a slirp network backend
+*   42	sys: Remove ancient SCCS tags.
+*   43	lib: Automated cleanup of cdefs and other formatting
+*   44	sys: Automated cleanup of cdefs and other formatting
+*   45	usr.sbin: Automated cleanup of cdefs and other formatting
+SF  46	pci_cfgreg: Add a PCI domain argument to the low-level register API
+SF  47	bhyve: Fix a leak that happens when we fail to load a hostfwd rule
+S   48	vmm: refactor event reflection in AMD SVM
+S   49	vmm: enable software breakpoints for AMD CPUs
+S   50	vmm: implement single-stepping for AMD CPUs
+S   51	vmm: implement VM_CAP_MASK_HWINTR on AMD CPUs
+S   52	bhyve: refactor gdbstub to enable single-stepping on AMD CPUs
+SF  53	vmm.h: remove dup declaration
+SA  54	bhyve.8: add missed dot
+SA  55	bhyve.8: fix -k description
+S   56	vmm_iommu_modify(): split vm_iommu_map()/unmap() into separate functions
+S   57	vm_iommu_map()/unmap(): stop transiently wiring already wired pages
+SF  58	vmm: Fix handling of errors from subyte()
+SF  59	bhyve/audio.c: avoid re-calculating the length of dev_name
+*   60	nvme: Add some bits from NVMe 2.0c spec.
+S   61	bhyve: increase SNAPSHOT_BUFFER_SIZE
+S   62	vmm: MTRR should be saved/restored
+*   63	bhyve: verify that user provided fbuf values fall within limits
+SA  64	Fix issue with Linux guest XHCI	tablet probing.
+*   65	bhyve: return ENOMEM instead of EFAULT and call free() after being used
+S   66	bhyve: correct slirp_recv_disable()
+*   67	bhyve: Avoid underflows when handling remote commands
+*   68	bhyve: Simplify register definitions a bit
+*   69	bhyve: Prepare to add arm64 support to the gdb stub
+*   70	nvme: Use the NVMEV macro instead of expanded versions
+*   71	bhyve: Use the NVMEV macro instead of expanded versions
+*   72	bhyve: Use NVMEV to read the ASQS field of AQA
+*   73	nvme: Rename NVMEB helper macro to NVMEM
+*   74	bhyve: Use the NVMEM macro instead of expanded versions
+*   75	nvme: Add NVMEF helper macro as the inverse of NVMEV
+*   76	bhyve: Use NVMEF macro to construct fields
+S   77	vmm: Fix compiling error with BHYVE_SNAPSHOT
+*   78	bhyve: Add support for the 'p' query
+S   79	vmm: Expose more registers to VM_GET_REGISTER
+S   80	bhyve: Add support for XML register definitions
+*   81	nvme: Firmware revisions in the firmware slot info logpage are ASCII strings
+*   82	nvme: Add SMART WARNING for persistent memory region
+S   83	bhyve/gdb: Avoid rebuilding target.xml for install targets
+*   84	bhyve: Move device model-independent UART code into a separate file
+*   85	nvme: Export constants for min and max queue sizes
+*   86	nvme: Add SGL structure and constants for use in NVMe commands
+*   87	nvme: Add constants for the PSDT field in cdw0
+*   88	nvme: Add constants for the extended data for Get Log Page command flag
+*   89	nvme: Add constants for fields in AER completion dword 0
+*   90	nvme: Add constants and types for the discovery log page
+*   91	nvme: Add constants for the Controller Attributes field in cdata
+*   92	nvme: Add NVMe over Fabrics fields to nvme_controller_data
+*   93	nvme: Add LPA bits
+*   94	bhyvectl: generate usage from options table
+S   95	libvmmapi: add missing capability strings
+S   96	bhyve: Add PL011 UART emulation
+S   97	bhyve: Provide optional libfdt linking
+S   98	ebhyve: Add FDT building code for arm64
+*   99	bhyve: Use vm_get_highmem_base() instead of hard-coding the value
+S  100	libvmmapi: Add a subdirectory for amd64-specific code
+S  101	libvmmapi: Move some ioctl wrappers to vmmapi_machdep.c
+S  102	libvmmapi: Move VM capability names to vmmapi_machdep.c
+S  103	libvmmapi: Split the ioctl list into MI and MD lists
+S  104	libvmmapi: Move more amd64-specific ioctl wrappers to vmmapi_machdep.c
+S  105	libvmmapi: Move PCI passthrough ioctl wrappers into a separate file
+~  106	libvmmapi: Make memory segment handling a bit more abstract
+S  107	libvmmapi: Add arm64 support
+S  108	libvmmapi: Make vm_raise_msi() a common function
+S  109	libvmmapi: Zero out the structure passed to VM_GET_MEMSEG
+S  110	bhyve: Add bhyverun and vmexit handlers for arm64
+*  111	bhyve: Do not compile PCI passthrough support on arm64
+S  112	bhyve: Add PCI mappings for arm64
+S  113	bhyve: Use vm_raise_msi() instead of vm_lapic_msi()
+S  114	bhyve: Partially disable INT#x support in virtio for arm64
+*  115	bhyve: Push option parsing down into bhyverun_machdep.c
+S  116	libvmmapi: Conditionalize compilation of some functions
+~  117	bhyve: Support legacy PCI interrupts on arm64
+S  118	bhyve: Fix arm64 PCI I/O range to match FDT
+S  119	bhyve: Extend mevent to support updating timers
+S  120	bhyve: Extract uart-clock from fdt_add_uart as an apb-pclk
+S  121	bhyve: Implement a PL031 RTC on arm64
+SF 122	vmm: Fix typo
+SF 123	vmm/x86: Fix typo
+SF 124	vhpet: Fix typo
+*  125	usr.sbin: Remove repeated words
+*  126	nvme: Eliminate intel_log_temp_stats_swapbytes
+*  127	vmm(4): Fix a typo in a kernel message
+S  128	bhyve.8: Remove mention of the -A flag
+S  129	bhyve.8: Document arm64 support
+S  130	bhyve.8: Update and rearrange to improve readability
+S  131	bhyve: Fix handling of -r
+S  132	bhyvectl: Prepare to add arm64 support
+S  133	bhyvectl: Add arm64 bits and hook it up to the build
+*  134	bhyve: Move lock of uart frontend to uart backend
+S  135	nvmf.h: New header defining ioctls for NVMe over Fabrics
+*  136	nvme: Add constants for the Fused Operation (FUSE) field in commands
+S  137	ctl: Support NVMe requests in debug trace functions
+*  138	nvme: Bump the alignment of struct nvme_health_information_page to 8
+S  139	vmm: Start reconciling amd64 and arm64 copies of vmm_dev.c
+SA 140	bhyve: Do not define GDB_LOG
+*  141	nvme: Explicitly align struct nvme_command on an 8 byte boundary
+*  142	nvme: Add telemetry page definitions
+*  143	bhyve: avoid resource leak
+*  144	bhyve: avoid resource leak in error path
+SA 145	bhyve: avoid side effect in assertion
+S  146	uma: Deduplicate uma_small_alloc
+S  147	vm: Simplify startup page dumping conditional
+S  148	bhyve: correctly remove a memory mapping
+S  149	bhyve: use correct size to map the OpRegion
+S  150	bhyve: verify OpRegion size
+*  151	x86: simplify ceil(log2(x)) function
+S  152	bhyve: Add arm64 support to the gdb stub
+S  153	bhyve: Add a stub VM_EXITCODE_REG_EMUL handler
+*  154	bhyve: Fix the build with gcc
+S  155	vm_page: Implement lazy page initialization
+S  156	amd64/vmm: Make vmm.h more self-contained
+S  157	nvme: Add Linux copatible ioctls
+S  158	vm_phys: Fix a typo
+S  159	x86: use order_base_2
+S  160	Remove residual blank line at start of Makefile
+*  161	nvme: Add bit names for nvme 2.0 for Async Events
+SF 162	Deprecate contigfree(9) in favour of free(9)
+*  163	bhyve: Treat the COMMAND register for PCI passthru devices as emulated
+S  164	bhyve: Escape binary data sent in reply packets
+*  165	bhyve: Sleep for a short period after VM_EXITCODE_DEBUG exits
+*  166	bhyve: Assert success in a couple of libvmmapi calls
+*  167	bhyve: avoid a potential deadlock
+S  168	bhyve: Optionally put vCPUs back in the debug state after resuming
+*  169	bhyve: remove empty E820 entries
+*  170	bhyve: Make boot ROM handling more consistent
+*  171	bhyve: Do not enable PCI BAR decoding if a boot ROM is present
+*  172	vmm ppt: Enable busmastering and BAR decoding while a device is assigned
+SA 173	bhyve(8): Remove mention of -A flag, again
+SF 174	vmm: Move vmm_ktr.h to a common directory
+SF 175	vmm: Move duplicated stats code into a generic file
+SF 176	vmm: Enable assertions in vmmdev_lookup()
+SF 177	vmm: Merge vmm_dev.c
+SF 178	vmm: Move compat ioctl definitions to vmm_dev.c
+*  179	bhyve: avoid updating fbaddr when vm_mmap_memseg fails
+SF 180	vmm: Harmonize compat ioctl definitions
+SF 181	vmm: Make vmm_dev.h more self-contained
+*  182	bhyve: fix Out-Of-Bounds read/write heap in tpm_ppi_mem_handler
+*  183	bhyve: fix off by one error in pci_xhci
+SA 184	bhyve: support noVNC SetPixelFormat request
+S  185	bhyve: Add raw tcp to uart backend
+*  186	bhyve: improve input validation in pci_xhci
+S  187	Remove stray whitespaces from sys/amd64/
+*F 188	bhyve: Fix an inverted check when enabling PCI busmastering
+*  189	bhyve: simplify slot validation in xHCI emulation
+*  190	bhyve: validate corb->wp to avoid infinite loop

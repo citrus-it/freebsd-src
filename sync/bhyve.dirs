@@ -1,0 +1,13 @@
+lib/libvmmapi				usr/src/lib/libvmmapi/common
+sys/amd64/vmm				usr/src/uts/intel/io/vmm
+usr.sbin/bhyve/kbdlayout		usr/src/data/bhyve/kbdlayout
+usr.sbin/bhyve				usr/src/cmd/bhyve/common
+usr.sbin/bhyvectl			usr/src/cmd/bhyvectl
+sys/amd64/include/vm.h			usr/src/uts/common/sys/vm.h
+sys/amd64/include/vmm.h			usr/src/uts/intel/sys/vmm.h
+sys/amd64/include/vmm_dev.h		usr/src/uts/intel/sys/vmm_dev.h
+sys/amd64/include/vmm_instruction_emul.h usr/src/uts/intel/io/vmm/sys/vmm_instruction_emul.h
+sys/amd64/include/vmm_snapshot.h	usr/src/uts/intel/sys/vmm_snapshot.h
+sys/amd64/include/vmparam.h		usr/src/uts/intel/sys/vmparam.h
+sys/dev/nvme/nvme.h			usr/src/contrib/bhyve/dev/nvme/nvme.h
+contrib/lib9p				usr/src/lib/lib9p/common

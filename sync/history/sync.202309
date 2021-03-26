@@ -1,0 +1,175 @@
+
+S - skipped
+U - updated to match upstream
+~ - partially taken
+* - merged
+ F - only freebsd-specific code changed
+ A - already had
+
+*    1	bhyve: Avoid triggering false -Wfree-nonheap-object warnings.
+*    2	bhyve: Remove vmctx argument from PCI device model methods.
+*F   3	bhyve: Fix a global buffer overread in the PCI hda device model.
+*F   4	bhyve: Fix a buffer overread in the PCI hda device model.
+S    5	vmm: take exclusive mem_segs_lock when (un)assigning ppt dev
+S    6	vmm: take exclusive mem_segs_lock in vm_cleanup()
+S    7	vmm: fix use after free in ppt_detach()
+S    8	vm: centralize VM_BATCHQUEUE_SIZE definition
+*    9	vtd: Increase DRHD_MAX_UNITS
+S   10	vmm: avoid spurious rendezvous
+S   11	vmm: purge EOL release compatibility
+S   12	vmm: Collapse identical case statements in vlapic_icrlo_write_handler()
+S   13	vmm: Remove an unneeded initialization of "retu"
+S   14	vmm: Fix AP startup compatibility for old bhyve executables
+*   15	bhyve: add helper struct for acpi device handling
+*   16	bhyve: add helper func to add acpi resources
+*   17	bhyve: add helper func to write a dsdt entry
+*   18	bhyve: maintain a list of acpi devices
+*   19	bhyve: add basic qemu fwcfg implementation
+*   20	bhyve: add emulation for the qemu fwcfg selector port
+*   21	bhyve: add emulation for qemu's fwcfg data port
+*   22	bhyve: add helper to add fwcfg items
+*   23	bhyve: add common fwcfg items
+S   24	vmm: fix restore of TSC offset
+S   25	bhyve: fix restore of kernel structs
+S   26	bhyve: fix resume for vms with guest_ncpus > 1
+*   27	bhyve: remove redundant variable
+*   28	bhyve: Remove useless return at the end of void function
+*   29	bhyvectl: Address compiler warnings and bump WARNS
+S   30	bhyvectl: do not return garbage from send_message
+S   31	bhyvectl: correct socket_fd closing in send_message
+S   32	bhyvectl: don't leak nvlist in send_message
+S   33	libvmm: add missing ioctl's to vm_ioctl_cmds
+S   34	bhyve: don't flush readonly device at blockif_pause
+S   35	bhyve: add cap limits for ipc socket
+S   36	bhyve: exit with EX_OSERR if init checkpoint or restore time failed
+S   37	bhyve: init checkput before caph_enter
+S   38	bhyvectl: don't permit using --suspend and --checkpoint at same time
+S   39	bhyve: Move libcasper dependecy to lib9p
+*   40	bhyve: Remove trailing semicolon
+*   41	bhyve: add helper for adding fwcfg files
+*   42	bhyve: add cmdline option to enable qemu's fwcfg
+SA  43	vmm: fix missing ipi statistic
+S   44	bhyve: Sleep briefly in the VMEXIT_DEBUG handler
+*   45	bhyve: Accept a variable-length string name for qemu_fwcfg_add_file.
+*   46	bhyve: Don't return -ENOMEM from qemu_fwcfg_add_file.
+*   47	libvmmapi: Add a struct vcpu and use it in most APIs.
+S   48	bhyve: Remove vmctx member from struct vm_snapshot_meta.
+*   49	bhyve: add helper to read PCI IDs from bhyve config
+*   50	bhyve: make use of helper to read PCI IDs from bhyve config
+*   51	bhyve: add config option to modify LPC IDs
+*   52	bhyve: fix spelling mistake of pcireg option
+*   53	bhyve: remove unnecessary const qualifier in acpi_device.h
+*   54	bhyve: return EEXIST when adding a fwcfg item twice
+*F  55	bhyve: scan PCI device functions to find host LPC
+*   56	bhyve: add QEMU_FWCFG_INDEX_NB_CPUS item
+*   57	bhyve: add missing include to qemu_fwcfg.c
+*   58	bhyve: introduce acpi_device_emul struct
+*   59	bhyve: do not exit if LPC finds no host selector
+*   60	bhyve: allow building device specific ACPI tables
+*   61	bhyve: check for errors when writing device specific DSDT entries
+*   62	bhyve: allow device specific DSDT entries
+*   63	bhyve: define array to protect passthru regs
+*   64	bhyve: add hook for PCI header of passthru devices
+*   65	bhyve: add QEMU_FWCFG_INDEX_MAX_CPUS item
+*   66	bhyve: save softc of ACPI devices
+S   67	Update/fix Makefile.depend for userland
+*   68	x86: Move i386 timerreg.h to x86
+*   69	ext2fs: extract crc16 into sys/crc16.h
+*   70	bhyve: add helper struct for qemus acpi table loader
+*   71	bhyve: make use of qemus acpi table loader
+*   72	vmm: Expose some more AVX512 CPUID bits to guests
+*   73	bhyve: add basic E820 implementation
+*   74	bhyve: add common memory holes to E820 table
+*   75	bhyve: add allocation function to E820
+*   76	bhyve: add E820 dump function
+*   77	bhyve: pass E820 table to guest
+S   78	vmm: fix HLT loop while vcpu has requested virtual interrupts
+S   79	vmm: Dynamically allocate a couple of per-CPU state save areas
+*F  80	bhyve: Disable bhyve HDA debug by default.
+*F  81	bhyve: Add DEBUG_HDA_FILE define to specify location of debug output
+S   82	bhyve: use directory file descriptor for checkpoint
+S   83	bhyve: enable capsicum for snapshot code
+*   84	bhyve(8): fix typo in examples
+S   85	vmm: don't free unallocated memory
+*   86	bhyve: specify OpenSSL 1.1 API
+S   87	bhyve: fix vCPU single-stepping on VMX
+S   88	bhyve: save/restore pir_desc
+*   89	bhyve: add cmdline option for user defined fw_cfg items
+S   90	bhyve: make passthru sel public available
+*   91	bhyve: don't panic if e820 finds no available memory
+S   92	bhyve: add helper for passthru specific mmio ranges
+S   93	bhyve: import OpRegion definitions
+*   94	spdx: The BSD-2-Clause-FreeBSD identifier is obsolete, drop -FreeBSD
+*   95	bhyve: error out if fwcfg user file isn't read completely
+S   96	vmm: Avoid embedding cpuset_t ioctl ABIs
+*   97	bhyve: Remove the exitcode stats structure
+S   98	bhyvectl: Update usage of vm_run()
+*   99	bhyve: Fix typos
+*  100	libvmmapi: Remove some unneeded includes
+*  101	bhyve: Remove vestigial support for setting max vCPUs.
+*  102	bhyve: allow adding FwCfg items to ACPI tables
+*  103	bhyve: add basic TPM device
+*  104	bhyve: register TPM device as ACPI device
+*  105	bhyve: Remove special no-op handling for I/O port 0x488
+*  106	bhyve: Sort SRCS
+S  107	bhyve: add empty GVT-d emulation
+S  108	bhyve: read out graphics stolen memory address and size
+S  109	bhyve: allocate guest memory for graphics stolen memory
+S  110	bhyve: emulate graphics stolen memory register
+S  111	bhyve: read OpRegion address and size for GVT-d
+S  112	bhyve: copy OpRegion into guest memory
+S  113	bhyve: pass address of OpRegion to the guest
+*  114	bhyve: use assert for missing TPM version
+*  115	bhyve: add basic TPM emulation struct
+*  116	bhyve: add basic TPM passthrough emulation
+*  117	bhyve: add basic CRB interface for TPM devices
+S  118	bhyve: rename 'structs' snapshot key with 'kern_structs'
+S  119	bhyve: simplify restore of kernel structs
+S  120	bhyve: rename 'user_dev' with 'devices'
+*  121	bhyve: add bus, slot and func to device name
+S  122	bhyve: add .pe_snapshot method for PCI 'hostbridge'
+S  123	bhyve: use pci_next() to save/restore pci devices
+S  124	bhyve: add command line parameter and parsing for migration
+S  125	bhyve: Remove some unneeded includes of segments.h
+*F 126	bhyve: Include vmm.h via the usual path
+*  127	bhyve: Register hlt and pause vmexit handlers unconditionally
+*  128	bhyve: Refactor vmexit_suspend() a bit
+*  129	bhyve: add helper to create a bootorder
+*  130	bhyve: add bootindex option for several devices
+*  131	bhyve: maintain RSDT and XSDT by basl
+*  132	bhyve/tpm: build TPM2 table by tpm interface
+*  133	bhyve/tpm: create crb thread for sending tpm commands
+*  134	bhyve: dos2unix
+S  135	lib9p: Remove set but unused sockets[] array from l9p_start_server.
+S  136	Revert "bhyve: add command line parameter and parsing for migration"
+*  137	Replace BSD-2-Clause-FreeBSD with BSD-2-Clause
+*  138	nvme: Fix typo in "Command Aborted by Host" constant name.
+*  139	bhyve: Stop calling pci_lintr_request() in the NVMe device model
+*  140	bhyve: Rename a pci_cfgrw() parameter
+*  141	bhyve: Deduplicate some code in modify_bar_registration()
+S  142	vmm: don't return random error from vcpu_lock_all() if vcpu is empty
+S  143	vmm: don't leak locks exiting vmmdev_ioctl()
+*  144	bhyve: Fix whitespace in bhyverun.c
+*  145	bhyve: Remove an unneeded vm_get_register() call in main()
+*  146	bhyve: do not hold CRB mutex when executing TPM commands
+*  147	bhyvectl: Add '--get-debug-cpus' command
+SA 148	bhyve: Fully reset the fwctl state machine if the guest requests a reset.
+*  149	nvme: Add more NVME Base Spec 2.0 and NVME Command Set Spec 1.0a
+*  150	bhyve: add emulation for CRB register of TPM devices
+*  151	bhyve: emulate TPM passthru by accessing /dev/tpmX
+*  152	bhyve: add Qemu PPI emulation for TPM devices
+*  153	nvme.h: Fix a comment typo in admin opcode enum
+*  154	sys: Remove $FreeBSD$: two-line .h pattern
+*  155	Remove $FreeBSD$: two-line .h pattern
+*  156	sys: Remove $FreeBSD$: one-line .h pattern
+*  157	sys: Remove $FreeBSD$: one-line .c pattern
+*  158	Remove $FreeBSD$: one-line .c pattern
+*  159	sys: Remove $FreeBSD$: one-line sh pattern
+*  160	Remove $FreeBSD$: one-line sh pattern
+*  161	Remove $FreeBSD$: two-line nroff pattern
+*  162	bhyve: add cmdline option for TPM emulation
+*  163	bhyve: Store the FreeBSD OUI in little-endian in the controller data
+*  164	bhyve: default UART to 115200
+S  165	vmm: Fix VM_GET_CPUS compatibility
+*  166	bhyve: add config option to load ACPI tables into memory
+*  193	bhyve nvme: Add NQN value

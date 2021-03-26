@@ -1,0 +1,51 @@
+
+S - skipped
+U - updated to match upstream
+~ - partially taken
+* - merged
+ F - only freebsd-specific code changed
+ A - already had
+
+UA   1	bhyve: Support setting the disk serial number for VirtIO block devices.
+S    2	cpuset(9): Add CPU_FOREACH_IS(SET|CLR) and modify consumers to use it
+S    3	Revert "cpuset(9): Add CPU_FOREACH_IS(SET|CLR) and modify consumers...
+SA   4	bhyve: Update the -G description in the SYNPOSIS.
+*    5	bhyve_config.5: Document gdb.address.
+*F   6	bhyve: Add an empty case for event types in mevent_kq_fflags().
+*    7	bhyve: Map the MSI-X table unconditionally for passthrough
+*    8	bhyve.8: Fix markup of the -G flag
+*    9	bhyve: Update usage and synopsis for the -k flag
+*   10	bhyve: ignore low bits of CFGADR
+S   11	cpuset(9): Add CPU_FOREACH_IS(SET|CLR) and modify consumers to use it
+S   12	bhyve: Fix the WITH_BHYVE_SNAPSHOT build
+~   13	vlapic: Schedule callouts on the local CPU
+		Created vlapic_callout_reset() and used it, but not moving
+		the cyclic since it's already localised via cyclic_move_here()
+		early on
+*   14	bhyve: Bump the SMBIOS firmware version to 14.0 for 14-CURRENT
+*   15	bhyve: use physical lobits for BARs of passthru devices
+*   16	bhyve: do not explicitly map fbuf framebuffer
+*   17	bhyve: move 64 bit BAR location to match OVMF assumptions
+*   18	bhyve: use a fixed 32 bit BAR base address
+*   19	bhyve: keep physical and virtual COMMAND reg in sync
+*   20	bhyve: emulate reads of MSI-X capabilities for passthru devices
+*   21	bhyve: Fix compile
+*   22	bhyve blockif: fix blockif_candelete with Capsicum
+*   23	bhyve: fix -Wunused-but-set-variable warning
+*   24	bhyve: Support a _VARS.fd file for bootrom
+*F  25	bhyve: set EV_CLEAR for EVFILT_VNODE mevents
+*   26	bhyve nvme: Add AEN support to NVMe emulation
+*   27	bhyve nvme: Inform guests of namespace resize
+S   28	bhyve: Only snapshot initialized VirtIO queues
+*   29	bhyve: passthru: enable BARs before possibly mmap(2)ing them
+*   30	bhyve: clean up trailing whitespaces
+SA  31	bhyve smbios type 3 structure is incorrect
+S   32	Make CPU_SET macros compliant with other implementations
+*   33	bhyve: only init MSI-X table if passthru device supports it
+*   34	bhyve: enumerate BARs by size
+*   35	bhyve: allow reading of fwctl signature multiple times
+*   36	bhyve: add more slop to 64 bit BARs
+*   37	bhyve: dynamically register FwCtl ports
+*   38  bhyve: Map the right BAR in init_msix_table()
+*   39  bhyve: Correct unmapping of the MSI-X table BAR
+

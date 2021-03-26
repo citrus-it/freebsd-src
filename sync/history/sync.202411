@@ -1,0 +1,36 @@
+
+S - skipped
+U - updated to match upstream
+~ - partially taken
+* - merged
+ F - only freebsd-specific code changed
+ A - already had
+
+*    1	bhyve: Initialize stack buffer in pci_ahci
+*    2	bhyve: initialize register value
+*    3	bhyve: avoid TOCTOU on iov_len in virtio_vq_recordon()
+*    4	bhyve: avoid buffer overflow in pci_vtcon_control_send
+SF   5	vmm: Properly handle writes spanning across two pages in vm_handle_db
+*    6	vmm: avoid potential KASSERT kernel panic in vm_handle_db
+SF   7	bhyve uart: Fix errors from GCC
+*    8	bhyve: improve bounds checks in hda_codec
+*    9	bhyve/nvme: Fix out-of-bounds read in NVMe log page
+SA  10	manuals: Fix "skipping end of block" .El errors
+*   11	bhyve/nvme: Fix Infinite loop in queue processing
+SF  12	Update Makefile.depend files
+SF  13	ebhyve/aarch64: Handle unknown exceptions
+SA  14	manuals: Misc syntax fixes
+*   15	bhyve: avoid buffer overflow in pci_vtcon_control_send
+*   16	bhyve: don't crash when guest writes TPM int_enable register
+*   17	bhyve: TPM CRB: pass actual TPM request length to backend execute_cmd()
+*   18	bhyve: TPM 2.0 emulation with swtpm
+*   19	bhyve: merge adjacent E820 entries
+*   20	bhyve ahci: Improve robustness of TRIM handling
+S   21	vmm: fix vcpu atomic load
+S   22	bhyve/riscv: Initial import.
+S   23	vmm: Rename the amdiommu driver to amdviiommu
+S   24	vmm: Add a device file interface for creating and destroying VMs
+S   25	libvmmapi: Use the vmmctl device file to create and destroy VMs
+S   26	bhyvectl: Convert to use vm_openf()
+S   27	bhyve: Convert to using vm_openf()
+S   28	vmm: Postpone vmm module initialization to after SI_SUB_DEVFS
