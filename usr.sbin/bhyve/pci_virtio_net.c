@@ -561,7 +561,7 @@ pci_vtnet_ping_ctlq(void *vsc, struct vqueue_info *vq)
 #endif
 
 static int
-pci_vtnet_init(struct vmctx *ctx, struct pci_devinst *pi, nvlist_t *nvl)
+pci_vtnet_init(struct vmctx *ctx, struct pci_devinst *pi, config_node_t *node)
 {
 	struct pci_vtnet_softc *sc;
 	const char *value;
@@ -588,7 +588,7 @@ pci_vtnet_init(struct vmctx *ctx, struct pci_devinst *pi, nvlist_t *nvl)
         sc->vsc_queues[VTNET_CTLQ].vq_notify = pci_vtnet_ping_ctlq;
 #endif
 
-	value = get_config_value_node(nvl, "mac");
+	value = get_config_value_node(node, "mac");
 	if (value != NULL) {
 		err = net_parsemac(value, sc->vsc_config.mac);
 		if (err) {
@@ -598,7 +598,7 @@ pci_vtnet_init(struct vmctx *ctx, struct pci_devinst *pi, nvlist_t *nvl)
 	} else
 		net_genmac(pi, sc->vsc_config.mac);
 
-	value = get_config_value_node(nvl, "mtu");
+	value = get_config_value_node(node, "mtu");
 	if (value != NULL) {
 		err = net_parsemtu(value, &mtu);
 		if (err) {
@@ -617,8 +617,8 @@ pci_vtnet_init(struct vmctx *ctx, struct pci_devinst *pi, nvlist_t *nvl)
 	sc->vsc_config.mtu = mtu;
 
 	/* Permit interfaces without a configured backend. */
-	if (get_config_value_node(nvl, "backend") != NULL) {
-		err = netbe_init(&sc->vsc_be, nvl, pci_vtnet_rx_callback, sc);
+	if (get_config_value_node(node, "backend") != NULL) {
+		err = netbe_init(&sc->vsc_be, node, pci_vtnet_rx_callback, sc);
 		if (err) {
 			free(sc);
 			return (err);

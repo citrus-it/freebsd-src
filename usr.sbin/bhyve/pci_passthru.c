@@ -619,7 +619,7 @@ done:
 }
 
 static int
-passthru_legacy_config(nvlist_t *nvl, const char *opts)
+passthru_legacy_config(config_node_t *node, const char *opts)
 {
 	char value[16];
 	int bus, slot, func;
@@ -633,16 +633,16 @@ passthru_legacy_config(nvlist_t *nvl, const char *opts)
 	}
 
 	snprintf(value, sizeof(value), "%d", bus);
-	set_config_value_node(nvl, "bus", value);
+	set_config_value_node(node, "bus", value);
 	snprintf(value, sizeof(value), "%d", slot);
-	set_config_value_node(nvl, "slot", value);
+	set_config_value_node(node, "slot", value);
 	snprintf(value, sizeof(value), "%d", func);
-	set_config_value_node(nvl, "func", value);
+	set_config_value_node(node, "func", value);
 	return (0);
 }
 
 static int
-passthru_init(struct vmctx *ctx, struct pci_devinst *pi, nvlist_t *nvl)
+passthru_init(struct vmctx *ctx, struct pci_devinst *pi, config_node_t *node)
 {
 	int bus, slot, func, error, memflags;
 	struct passthru_softc *sc;
@@ -712,7 +712,7 @@ passthru_init(struct vmctx *ctx, struct pci_devinst *pi, nvlist_t *nvl)
 #endif
 
 #define GET_INT_CONFIG(var, name) do {					\
-	value = get_config_value_node(nvl, name);			\
+	value = get_config_value_node(node, name);			\
 	if (value == NULL) {						\
 		EPRINTLN("passthru: missing required %s setting", name); \
 		return (error);						\

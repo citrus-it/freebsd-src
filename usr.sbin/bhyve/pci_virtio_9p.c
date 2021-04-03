@@ -222,7 +222,7 @@ pci_vt9p_notify(void *vsc, struct vqueue_info *vq)
 }
 
 static int
-pci_vt9p_legacy_config(nvlist_t *nvl, const char *opts)
+pci_vt9p_legacy_config(config_node_t *node, const char *opts)
 {
 	char *sharename, *tofree, *token, *tokens;
 
@@ -239,17 +239,17 @@ pci_vt9p_legacy_config(nvlist_t *nvl, const char *opts)
 			}
 
 			sharename = strsep(&token, "=");
-			set_config_value_node(nvl, "sharename", sharename);
-			set_config_value_node(nvl, "path", token);
+			set_config_value_node(node, "sharename", sharename);
+			set_config_value_node(node, "path", token);
 		} else
-			set_config_bool_node(nvl, token, true);
+			set_config_bool_node(node, token, true);
 	}
 	free(tofree);
 	return (0);
 }
 
 static int
-pci_vt9p_init(struct vmctx *ctx, struct pci_devinst *pi, nvlist_t *nvl)
+pci_vt9p_init(struct vmctx *ctx, struct pci_devinst *pi, config_node_t *node)
 {
 	struct pci_vt9p_softc *sc;
 	const char *value;
@@ -258,9 +258,9 @@ pci_vt9p_init(struct vmctx *ctx, struct pci_devinst *pi, nvlist_t *nvl)
 	bool ro;
 	cap_rights_t rootcap;
 
-	ro = get_config_bool_node_default(nvl, "ro", false);
+	ro = get_config_bool_node_default(node, "ro", false);
 
-	value = get_config_value_node(nvl, "path");
+	value = get_config_value_node(node, "path");
 	if (value == NULL) {
 		EPRINTLN("virtio-9p: path required");
 		return (1);
@@ -272,7 +272,7 @@ pci_vt9p_init(struct vmctx *ctx, struct pci_devinst *pi, nvlist_t *nvl)
 		return (-1);
 	}
 
-	sharename = get_config_value_node(nvl, "sharename");
+	sharename = get_config_value_node(node, "sharename");
 	if (sharename == NULL) {
 		EPRINTLN("virtio-9p: share name required");
 		return (1);

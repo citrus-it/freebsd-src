@@ -74,7 +74,7 @@ __FBSDID("$FreeBSD$");
 #define	MAXFUNCS	(PCI_FUNCMAX + 1)
 
 struct funcinfo {
-	nvlist_t *fi_config;
+	config_node_t *fi_config;
 	struct pci_devemu *fi_pde;
 	struct pci_devinst *fi_devi;
 };
@@ -178,7 +178,7 @@ pci_parse_slot_usage(char *aopt)
  * of true.
  */
 int
-pci_parse_legacy_config(nvlist_t *nvl, const char *opt)
+pci_parse_legacy_config(config_node_t *node, const char *opt)
 {
 	char *config, *name, *tofree, *value;
 
@@ -191,9 +191,9 @@ pci_parse_legacy_config(nvlist_t *nvl, const char *opt)
 		if (value != NULL) {
 			*value = '\0';
 			value++;
-			set_config_value_node(nvl, name, value);
+			set_config_value_node(node, name, value);
 		} else
-			set_config_bool_node(nvl, name, true);
+			set_config_bool_node(node, name, true);
 	}
 	free(tofree);
 	return (0);
@@ -220,7 +220,7 @@ pci_parse_slot(char *opt)
 	struct pci_devemu *pde;
 	char *emul, *config, *str, *cp;
 	int error, bnum, snum, fnum;
-	nvlist_t *nvl;
+	config_node_t *node;
 
 	error = -1;
 	str = strdup(opt);
@@ -266,22 +266,22 @@ pci_parse_slot(char *opt)
 
 	snprintf(node_name, sizeof(node_name), "pci.%d.%d.%d", bnum, snum,
 	    fnum);
-	nvl = find_config_node(node_name);
-	if (nvl != NULL) {
+	node = find_config_node(node_name);
+	if (node != NULL) {
 		EPRINTLN("pci slot %d:%d:%d already occupied!", bnum, snum,
 		    fnum);
 		goto done;
 	}
-	nvl = create_config_node(node_name);
+	node = create_config_node(node_name);
 	if (pde->pe_alias != NULL)
-		set_config_value_node(nvl, "device", pde->pe_alias);
+		set_config_value_node(node, "device", pde->pe_alias);
 	else
-		set_config_value_node(nvl, "device", pde->pe_emu);
+		set_config_value_node(node, "device", pde->pe_emu);
 
 	if (pde->pe_legacy_config != NULL)
-		error = pde->pe_legacy_config(nvl, config);
+		error = pde->pe_legacy_config(node, config);
 	else
-		error = pci_parse_legacy_config(nvl, config);
+		error = pci_parse_legacy_config(node, config);
 done:
 	free(str);
 	return (error);
@@ -1143,7 +1143,7 @@ init_pci(struct vmctx *ctx)
 	struct businfo *bi;
 	struct slotinfo *si;
 	struct funcinfo *fi;
-	nvlist_t *nvl;
+	config_node_t *node;
 	const char *emul;
 	size_t lowmem;
 	uint64_t cpu_maxphysaddr, pci_emul_memresv64;
@@ -1168,8 +1168,8 @@ init_pci(struct vmctx *ctx)
 
 	for (bus = 0; bus < MAXBUSES; bus++) {
 		snprintf(node_name, sizeof(node_name), "pci.%d", bus);
-		nvl = find_config_node(node_name);
-		if (nvl == NULL)
+		node = find_config_node(node_name);
+		if (node == NULL)
 			continue;
 		pci_businfo[bus] = calloc(1, sizeof(struct businfo));
 		bi = pci_businfo[bus];
@@ -1188,12 +1188,12 @@ init_pci(struct vmctx *ctx)
 				fi = &si->si_funcs[func];
 				snprintf(node_name, sizeof(node_name),
 				    "pci.%d.%d.%d", bus, slot, func);
-				nvl = find_config_node(node_name);
-				if (nvl == NULL)
+				node = find_config_node(node_name);
+				if (node == NULL)
 					continue;
 
-				fi->fi_config = nvl;
-				emul = get_config_value_node(nvl, "device");
+				fi->fi_config = node;
+				emul = get_config_value_node(node, "device");
 				if (emul == NULL) {
 					EPRINTLN("pci slot %d:%d:%d: missing "
 					    "\"device\" value", bus, slot, func);
@@ -2252,7 +2252,7 @@ struct pci_emul_dsoftc {
 #define	PCI_EMUL_MSIX_MSGS	16
 
 static int
-pci_emul_dinit(struct vmctx *ctx, struct pci_devinst *pi, nvlist_t *nvl)
+pci_emul_dinit(struct vmctx *ctx, struct pci_devinst *pi, config_node_t *node)
 {
 	int error;
 	struct pci_emul_dsoftc *sc;

@@ -2278,7 +2278,7 @@ e82545_reset(struct e82545_softc *sc, int drvr)
 }
 
 static int
-e82545_init(struct vmctx *ctx, struct pci_devinst *pi, nvlist_t *nvl)
+e82545_init(struct vmctx *ctx, struct pci_devinst *pi, config_node_t *node)
 {
 	char nstr[80];
 	struct e82545_softc *sc;
@@ -2309,7 +2309,7 @@ e82545_init(struct vmctx *ctx, struct pci_devinst *pi, nvlist_t *nvl)
 
 	pci_set_cfgdata8(pi,  PCIR_HDRTYPE, PCIM_HDRTYPE_NORMAL);
 	pci_set_cfgdata8(pi,  PCIR_INTPIN, 0x1);
-	
+
 	/* TODO: this card also supports msi, but the freebsd driver for it
 	 * does not, so I have not implemented it. */
 	pci_lintr_request(pi);
@@ -2321,7 +2321,7 @@ e82545_init(struct vmctx *ctx, struct pci_devinst *pi, nvlist_t *nvl)
 	pci_emul_alloc_bar(pi, E82545_BAR_IO, PCIBAR_IO,
 		E82545_BAR_IO_LEN);
 
-	mac = get_config_value_node(nvl, "mac");
+	mac = get_config_value_node(node, "mac");
 	if (mac != NULL) {
 		err = net_parsemac(mac, sc->esc_mac.octet);
 		if (err) {
@@ -2331,7 +2331,7 @@ e82545_init(struct vmctx *ctx, struct pci_devinst *pi, nvlist_t *nvl)
 	} else
 		net_genmac(pi, sc->esc_mac.octet);
 
-	err = netbe_init(&sc->esc_be, nvl, e82545_rx_callback, sc);
+	err = netbe_init(&sc->esc_be, node, e82545_rx_callback, sc);
 	if (err) {
 		free(sc);
 		return (err);

@@ -241,17 +241,17 @@ pci_fbuf_baraddr(struct vmctx *ctx, struct pci_devinst *pi, int baridx,
 
 
 static int
-pci_fbuf_parse_config(struct pci_fbuf_softc *sc, nvlist_t *nvl)
+pci_fbuf_parse_config(struct pci_fbuf_softc *sc, config_node_t *node)
 {
 	const char *value;
 	char *cp;
 
-	sc->rfb_wait = get_config_bool_node_default(nvl, "wait", false);
+	sc->rfb_wait = get_config_bool_node_default(node, "wait", false);
 
 	/* Prefer "rfb" to "tcp". */
-	value = get_config_value_node(nvl, "rfb");
+	value = get_config_value_node(node, "rfb");
 	if (value == NULL)
-		value = get_config_value_node(nvl, "tcp");
+		value = get_config_value_node(node, "tcp");
 	if (value != NULL) {
 		/*
 		 * IPv4 -- host-ip:port
@@ -299,7 +299,7 @@ pci_fbuf_parse_config(struct pci_fbuf_softc *sc, nvlist_t *nvl)
 		}
 	}
 
-	value = get_config_value_node(nvl, "vga");
+	value = get_config_value_node(node, "vga");
 	if (value != NULL) {
 		if (strcmp(value, "off") == 0) {
 			sc->vga_enabled = 0;
@@ -315,7 +315,7 @@ pci_fbuf_parse_config(struct pci_fbuf_softc *sc, nvlist_t *nvl)
 		}
 	}
 
-	value = get_config_value_node(nvl, "w");
+	value = get_config_value_node(node, "w");
 	if (value != NULL) {
 		sc->memregs.width = atoi(value);
 		if (sc->memregs.width > COLS_MAX) {
@@ -326,7 +326,7 @@ pci_fbuf_parse_config(struct pci_fbuf_softc *sc, nvlist_t *nvl)
 			sc->memregs.width = 1920;
 	}
 
-	value = get_config_value_node(nvl, "h");
+	value = get_config_value_node(node, "h");
 	if (value != NULL) {
 		sc->memregs.height = atoi(value);
 		if (sc->memregs.height > ROWS_MAX) {
@@ -338,7 +338,7 @@ pci_fbuf_parse_config(struct pci_fbuf_softc *sc, nvlist_t *nvl)
 			sc->memregs.height = 1080;
 	}
 
-	value = get_config_value_node(nvl, "password");
+	value = get_config_value_node(node, "password");
 	if (value != NULL)
 		sc->rfb_password = strdup(value);
 
@@ -373,7 +373,7 @@ pci_fbuf_render(struct bhyvegc *gc, void *arg)
 }
 
 static int
-pci_fbuf_init(struct vmctx *ctx, struct pci_devinst *pi, nvlist_t *nvl)
+pci_fbuf_init(struct vmctx *ctx, struct pci_devinst *pi, config_node_t *node)
 {
 	int error, prot;
 	struct pci_fbuf_softc *sc;
@@ -413,7 +413,7 @@ pci_fbuf_init(struct vmctx *ctx, struct pci_devinst *pi, nvlist_t *nvl)
 
 	sc->fsc_pi = pi;
 
-	error = pci_fbuf_parse_config(sc, nvl);
+	error = pci_fbuf_parse_config(sc, node);
 	if (error != 0)
 		goto done;
 
