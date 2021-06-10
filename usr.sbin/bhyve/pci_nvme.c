@@ -2800,11 +2800,39 @@ done:
 	return (error);
 }
 
+static int
+pci_nvme_legacy_config(nvlist_t *nvl, const char *opts)
+{
+	char *cp, *path;
+
+	if (opts == NULL)
+		return (0);
+
+	if ((cp = strchr(opts, ',')) != NULL) {
+		int error;
+
+		if ((error = pci_parse_legacy_config(nvl, cp + 1)) != 0)
+			return (error);
+
+		path = strndup(opts, cp - opts);
+	} else {
+		path = strdup(opts);
+	}
+	if (path == NULL)
+		return (-1);
+	if (strncmp(path, "ram=", 4) == 0)
+		set_config_value_node(nvl, "ram", path + 4);
+	else
+		set_config_value_node(nvl, "path", path);
+	free(path);
+
+	return (0);
+}
 
 struct pci_devemu pci_de_nvme = {
 	.pe_emu =	"nvme",
 	.pe_init =	pci_nvme_init,
-	.pe_legacy_config = blockif_legacy_config,
+	.pe_legacy_config = pci_nvme_legacy_config,
 	.pe_barwrite =	pci_nvme_write,
 	.pe_barread =	pci_nvme_read
 };
