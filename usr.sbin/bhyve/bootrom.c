@@ -196,13 +196,13 @@ bootrom_loadrom(struct vmctx *ctx, const char *romfile)
 	struct stat sbuf;
 	ssize_t rlen;
 	off_t rom_size, var_size, total_size;
-	char *ptr, *varfile;
+	char *ptr, *varfile, *ostr;
 	int fd, varfd, i, rv;
 
 	rv = -1;
 	varfd = -1;
 
-	varfile = strdup(romfile);
+	ostr = varfile = strdup(romfile);
 	romfile = strsep(&varfile, ",");
 
 	fd = open(romfile, O_RDONLY);
@@ -293,5 +293,6 @@ bootrom_loadrom(struct vmctx *ctx, const char *romfile)
 done:
 	if (fd >= 0)
 		close(fd);
+	free(ostr);
 	return (rv);
 }

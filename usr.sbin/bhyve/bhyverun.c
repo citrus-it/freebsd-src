@@ -270,7 +270,7 @@ usage(int code)
 static int
 topology_parse(const char *opt)
 {
-	char *cp, *str;
+	char *cp, *str, *ostr;
 
 	if (*opt == '\0') {
 		set_config_value("sockets", "1");
@@ -280,7 +280,7 @@ topology_parse(const char *opt)
 		return (0);
 	}
 
-	str = strdup(opt);
+	ostr = str = strdup(opt);
 	if (str == NULL)
 		errx(4, "Failed to allocate memory");
 
@@ -302,11 +302,11 @@ topology_parse(const char *opt)
 		else
 			set_config_value("cpus", cp);
 	}
-	free(str);
+	free(ostr);
 	return (0);
 
 out:
-	free(str);
+	free(ostr);
 	return (-1);
 }
 
